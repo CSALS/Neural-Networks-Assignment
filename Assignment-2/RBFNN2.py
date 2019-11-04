@@ -5,12 +5,14 @@ from sklearn.cluster import KMeans
 
 
 def gaussian(x, mu, std):
+    print(np.exp((-1/(2*(std**2))) * np.sum((x - mu)**2)))
     return np.exp((-1/(2*(std**2))) * np.sum((x - mu)**2))
 
 def multiquadric(x, mu, std):
     return np.sum(np.sqrt(np.sum(np.square(x-mu)) + (std**2)))
 
 def linear(x, mu, std):
+    print(np.sum(abs(x - mu)))
     return np.sum(abs(x - mu))
 
 def train(X_train, y_train):
@@ -25,8 +27,8 @@ def train(X_train, y_train):
     stds = []
     for i in range(k):
         temp = X_train[(assignments==i)]
+        print("sum is ", sum(abs(temp-means[i])))
         stds.append((1/temp.shape[0])*sum(abs(temp-means[i])))
-        # stds.append(np.std(X_train[(assignments==i)]))
     stds = np.array(stds)
 
     H = np.ndarray((m,k))

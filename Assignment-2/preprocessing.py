@@ -10,7 +10,9 @@ def getData(name):
     Y = np.reshape(Y,(Y.shape[0],1))
     Y = Y.astype(int)
     #Feature Scaling
-    X = (X - np.mean(X,axis=0))/np.std(X,axis=0)
+    #X = (X - np.mean(X,axis=0))/np.std(X,axis=0)
     #np.eye() - ones on diagonal , zeros on rest
     Y = np.eye(len(np.unique(Y,axis=0)))[(Y.T).flatten()]
-    return valueArray,X,Y
+    return X,Y
+
+
