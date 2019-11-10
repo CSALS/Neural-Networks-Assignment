@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy.io import loadmat
 import matplotlib.pyplot as plt
-from preprocessing import getData
+from preprocessing import NormalScaler
 import time
 
 class MLP:
@@ -227,7 +227,20 @@ def start_run():
 
 if __name__=='__main__':
         
-    X, y_cat = getData('data.mat')
+    # data input
+    data = pd.DataFrame(loadmat('./data5.mat')['x'])
+    data = data.sample(frac=1).reset_index(drop=True)
+    X = data.loc[:,:71].values
+    y = data.loc[:,72:73].values
+    y_cat = np.zeros((y.shape[0],2)).astype(np.int)
+    for i in range(y.shape[0]):
+        y_cat[i][int(y[i])] = 1
+
+    # data preprocessing
+    scaler = NormalScaler()
+    for j in range(X.shape[1]):
+        scaler.fit(X[:,j])
+        X[:,j] = scaler.transform(X[:,j])
 
     # give 'holdout' for hold-out cross validation split
     # or 'kfold' for k-fold cross validation split.

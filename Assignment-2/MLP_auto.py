@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from scipy.io import loadmat
-from preprocessing import NormalScaler
+from preprocessing import getData
 
 class MLP:
     def __init__(self, layers_arr, activ_arr):
@@ -155,3 +155,7 @@ class MLP:
             self.forward_prop(X[i])
             cost += np.sum((self.A[self.L2]-y[i].reshape(-1,1))**2)
         print(" ",cost/y.shape[0])
+
+
+
+

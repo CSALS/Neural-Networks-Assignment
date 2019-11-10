@@ -60,3 +60,5 @@ if __name__=='__main__':
     final_model.train(X_train, y_train,X_test,y_test, alpha, batch_size, max_iter)
     print(final_model.accuracy(X_test,y_test))
     print(final_model.conf_mat(X_test, y_test))
+
+
